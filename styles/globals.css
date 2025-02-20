@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.gradient-button {
+    background: linear-gradient(to right, #30c2b7, #70e1a6, #96efc1);
+    color: #373737;
+    border: none;
+}
+
+.gradient-text {
+    background: linear-gradient(to right, #30c2b7, #70e1a6, #96efc1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-text {
+    color: #259d84;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
