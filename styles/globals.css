@@ -15,7 +15,16 @@
 }
 
 .brand-text {
-    color: #259d84;
+    color: #ffffff;
     font-weight: bold;
     font-size: 1.5rem;
+}
+
+.navbar-size {
+    height: 4.5rem;
+}
+
+.sidebar-size {
+    width: 4.5rem;
+    height: 100%;
 }
