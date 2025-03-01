@@ -1,7 +1,5 @@
 import { NavigationBar } from "@/components/navbar";
-import { Sidebar } from "@/components/sidebar";
 import { SubNavigationBar } from "@/components/subnavbar";
-import { Button } from "@heroui/react";
 
 export default function AuthLayout({
     children,

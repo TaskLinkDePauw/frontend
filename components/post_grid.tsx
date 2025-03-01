@@ -13,13 +13,13 @@ interface Post {
     description: string;
 }
 
-export const PostGrid = ({ post }: { post: Post }) => {
+export const PostGrid = ({ post, onPress }: { post: Post, onPress: () => void }) => {
     return (
         <Card
             key={post.id}
             isPressable
             isHoverable
-            onPress={() => console.log("Card Clicked")}
+            onPress={onPress}
             className={`p-4 dark:bg-[#1F2937] dark:border-none ${post.color}`}
         >
             <CardHeader className="flex flex-col gap-1">

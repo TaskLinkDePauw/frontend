@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import {
     Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Avatar, Tooltip
 } from "@heroui/react";
-import { HomeIcon, AddIcon, ProfileIcon, DatabaseIcon, NotificationIcon } from "./icons/page";
+import { HomeIcon, AddIcon, ProfileIcon, DatabaseIcon, NotificationIcon, MessageIcon } from "./icons/page";
 import { logoutUser } from '@/services/auth';
 
 export const NavigationBar = ({ isAuthPage = true }) => {
@@ -29,8 +29,8 @@ export const NavigationBar = ({ isAuthPage = true }) => {
             </NavbarContent>
         </Navbar>
     ) : (
-        <Navbar isBlurred={false} maxWidth="full"
-            className="bg-[#259d84]"
+        <Navbar isBlurred={false} maxWidth="full" position='sticky'
+            className="px-28 bg-white"
             classNames={{
                 item: [
                     "flex",
@@ -44,7 +44,7 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                     "data-[active=true]:after:right-0",
                     "data-[active=true]:after:h-[2px]",
                     "data-[active=true]:after:rounded-[2px]",
-                    "data-[active=true]:after:bg-primary",
+                    "data-[active=true]:after:bg-[#259d84]",
                     "navbar-size",
                 ],
             }}
@@ -52,6 +52,56 @@ export const NavigationBar = ({ isAuthPage = true }) => {
             <NavbarBrand>
                 <p className="brand-text">TaskLink</p>
             </NavbarBrand>
+            <NavbarContent className="hidden sm:flex gap-4" justify="center">
+                <NavbarItem className="w-32 flex justify-center" isActive={currentRoute === '/profile'}>
+                    <Tooltip
+                        content={
+                            <div className="px-1 py-2">
+                                <div className="text-md">Profile</div>
+                            </div>
+                        }
+                        delay={0}
+                        closeDelay={0}
+                        offset={25}
+                    >
+                        <Link href="profile">
+                            <ProfileIcon color='#259d84' />
+                        </Link>
+                    </Tooltip>
+                </NavbarItem>
+                <NavbarItem className="w-32 flex justify-center" isActive={currentRoute === '/home'}>
+                    <Tooltip
+                        content={
+                            <div className="px-1 py-2">
+                                <div className="text-md">Home</div>
+                            </div>
+                        }
+                        delay={0}
+                        closeDelay={0}
+                        offset={25}
+                    >
+                        <Link href="dashboard">
+                            <HomeIcon color='#259d84' />
+                        </Link>
+                    </Tooltip>
+                </NavbarItem>
+                <NavbarItem className="w-32 flex justify-center" isActive={currentRoute === '/database'}>
+                    <Tooltip
+                        content={
+                            <div className="px-1 py-2">
+                                <div className="text-md">Database</div>
+                            </div>
+                        }
+                        delay={0}
+                        closeDelay={0}
+                        offset={25}
+                    >
+                        <Link href="database">
+                            <DatabaseIcon color='#259d84' />
+                        </Link>
+                    </Tooltip>
+                </NavbarItem>
+            </NavbarContent>
             <NavbarContent className="hidden sm:flex gap-8" justify="end">
                 <NavbarItem>
                     <Tooltip
@@ -73,6 +123,22 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                     <Tooltip
                         content={
                             <div className="px-1 py-2">
+                                <div className="text-md">Message</div>
+                            </div>
+                        }
+                        delay={0}
+                        closeDelay={0}
+                        offset={25}
+                    >
+                        <Link href="#">
+                            <MessageIcon color="#259d84" />
+                        </Link>
+                    </Tooltip>
+                </NavbarItem>
+                <NavbarItem>
+                    <Tooltip
+                        content={
+                            <div className="px-1 py-2">
                                 <div className="text-md">Notification</div>
                             </div>
                         }
@@ -81,7 +147,7 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                         offset={25}
                     >
                         <Link href="#">
-                            <NotificationIcon />
+                            <NotificationIcon color="#259d84" />
                         </Link>
                     </Tooltip>
                 </NavbarItem>
@@ -89,10 +155,8 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                     <Dropdown placement="bottom-end">
                         <DropdownTrigger>
                             <Avatar
-                                isBordered
-                                as="button"
                                 className="transition-transform"
-                                color="secondary"
+                                style={{ boxShadow: '0 0 0 2px #259d84' }}
                                 name="Jason Hughes"
                                 size="md"
                                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"

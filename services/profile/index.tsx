@@ -11,8 +11,9 @@ const MAX_NUMBER_OF_TRIES = 3
 export const getProfile = async (): Promise<{ data: any; ok: boolean }> => {
     try {
         for (let tries = 0; tries < MAX_NUMBER_OF_TRIES; tries++) {
-            const access_token = cookies().get('access_token')?.value;
-            const userId = cookies().get('user_id')?.value;
+            const cookieStore = await cookies();
+            const access_token = cookieStore.get('access_token')?.value;
+            const userId = cookieStore.get('user_id')?.value;
             const response = await fetch(`${API_URL}/get_user/${userId}`, {
                 method: "GET",
                 headers: {
@@ -40,8 +41,9 @@ export const updateResume = async (): Promise<{ data: any; ok: boolean }> => {
     try {
         for (let tries = 0; tries < MAX_NUMBER_OF_TRIES; tries++) {
 
-            const access_token = cookies().get('access_token')?.value;
-            const userId = cookies().get('user_id')?.value;
+            const cookieStore = await cookies();
+            const access_token = cookieStore.get('access_token')?.value;
+            const userId = cookieStore.get('user_id')?.value;
 
             const response = await fetch(`${API_URL}/update_resume`, {
                 method: "POST",
@@ -72,8 +74,9 @@ export const getResume = async (): Promise<{ data: any; ok: boolean }> => {
     try {
         for (let tries = 0; tries < MAX_NUMBER_OF_TRIES; tries++) {
 
-            const access_token = cookies().get('access_token')?.value;
-            const userId = cookies().get('user_id')?.value;
+            const cookieStore = await cookies();
+            const access_token = cookieStore.get('access_token')?.value;
+            const userId = cookieStore.get('user_id')?.value;
 
             const response = await fetch(`${API_URL}/get_resume/${userId}`, {
                 method: "GET",
@@ -101,8 +104,9 @@ export const getResume = async (): Promise<{ data: any; ok: boolean }> => {
 export const createResume = async (createResumeInput: CreateResumeInput): Promise<{ data: any; ok: boolean }> => {
     try {
         for (let tries = 0; tries < MAX_NUMBER_OF_TRIES; tries++) {
-            const access_token = cookies().get('access_token')?.value;
-            const userId = cookies().get('user_id')?.value;
+            const cookieStore = await cookies();
+            const access_token = cookieStore.get('access_token')?.value;
+            const userId = cookieStore.get('user_id')?.value;
 
             const response = await fetch(`${API_URL}/create_resume`, {
                 method: "POST",
