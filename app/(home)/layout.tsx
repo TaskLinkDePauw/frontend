@@ -1,5 +1,4 @@
 import { NavigationBar } from "@/components/navbar";
-import { SubNavigationBar } from "@/components/subnavbar";
 
 export default function AuthLayout({
     children,
@@ -9,23 +8,17 @@ export default function AuthLayout({
     return (
         <div
             style={{
-                display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw'
+                display: 'flex', flexDirection: 'column', width: '100%'
             }}
         >
-            <div className="w-full h-auto">
+            <div className="w-full h-20">
                 <NavigationBar isAuthPage={false} />
-            </div>
-            <div className="w-full px-8 pb-4 bg-[#f5f5f5]">
-                <SubNavigationBar />
             </div>
             <div
                 style={{
-                    display: 'flex', flexDirection: 'row', height: '100vh', width: '100vw', alignItems: 'center', justifyContent: 'center',
-                    backgroundColor: '#f5f5f5'
+                    display: 'flex', flexDirection: 'column', height: 'auto', width: 'auto', paddingBottom: '20px', paddingRight: '20px', paddingLeft: '20px'
                 }}
-            >
-                {children}
-            </div>
+            >{children}</div>
         </div >
     );
 }

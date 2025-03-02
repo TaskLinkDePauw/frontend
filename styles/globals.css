@@ -14,6 +14,14 @@
     -webkit-text-fill-color: transparent;
 }
 
+.plain-green-color {
+    background: #259d84;
+}
+
+.gradient-color {
+    background: linear-gradient(to right, #259d84, #30c2b7);
+}
+
 .brand-text {
     color: #259d84;
     font-weight: bold;
