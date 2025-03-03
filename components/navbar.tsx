@@ -1,141 +1,181 @@
+'use client';
+
+import { usePathname, useRouter } from 'next/navigation';
 import {
-  Navbar as HeroUINavbar,
-  NavbarContent,
-  NavbarMenu,
-  NavbarMenuToggle,
-  NavbarBrand,
-  NavbarItem,
-  NavbarMenuItem,
-} from "@heroui/navbar";
-import { Button } from "@heroui/button";
-import { Kbd } from "@heroui/kbd";
-import { Link } from "@heroui/link";
-import { Input } from "@heroui/input";
-import { link as linkStyles } from "@heroui/theme";
-import NextLink from "next/link";
-import clsx from "clsx";
+    Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Avatar, Tooltip
+} from "@heroui/react";
+import { HomeIcon, AddIcon, ProfileIcon, DatabaseIcon, NotificationIcon, MessageIcon } from "./icons/page";
+import { logoutUser } from '@/services/auth';
 
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
-  HeartFilledIcon,
-  SearchIcon,
-  Logo,
-} from "@/components/icons";
+export const NavigationBar = ({ isAuthPage = true }) => {
+    const currentRoute = usePathname()
+    const router = useRouter();
 
-export const Navbar = () => {
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-      }}
-      endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
-          K
-        </Kbd>
-      }
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
-  );
+    const handleLogOut = () => {
+        logoutUser();
+        router.replace("/login");
+    }
+    return isAuthPage ? (
+        <Navbar isBlurred isBordered maxWidth="full" height="4.5rem">
+            <NavbarBrand>
+                <p className="brand-text">TaskLink</p>
+            </NavbarBrand>
+            <NavbarContent justify="end">
+                <NavbarItem>
+                    <Button as={Link} color="primary" href="login" className="gradient-button">
+                        Login
+                    </Button>
+                </NavbarItem>
+            </NavbarContent>
+        </Navbar>
+    ) : (
+        <Navbar isBlurred={false} maxWidth="full" position='sticky'
+            className="px-28 bg-white"
+            classNames={{
+                item: [
+                    "flex",
+                    "relative",
+                    "h-full",
+                    "items-center",
+                    "data-[active=true]:after:content-['']",
+                    "data-[active=true]:after:absolute",
+                    "data-[active=true]:after:bottom-0",
+                    "data-[active=true]:after:left-0",
+                    "data-[active=true]:after:right-0",
+                    "data-[active=true]:after:h-[2px]",
+                    "data-[active=true]:after:rounded-[2px]",
+                    "data-[active=true]:after:bg-[#259d84]",
+                    "navbar-size",
+                ],
+            }}
+        >
+            <NavbarBrand>
+                <p className="brand-text">TaskLink</p>
+            </NavbarBrand>
+            <NavbarContent className="hidden sm:flex gap-4" justify="center">
+                <NavbarItem className="w-32 flex justify-center" isActive={currentRoute === '/profile'}>
+                    <Tooltip
+                        content={
+                            <div className="px-1 py-2">
+                                <div className="text-md">Profile</div>
+                            </div>
+                        }
+                        delay={0}
+                        closeDelay={0}
+                        offset={25}
+                    >
+                        <Link href="profile">
+                            <ProfileIcon color='#259d84' />
+                        </Link>
+                    </Tooltip>
+                </NavbarItem>
+                <NavbarItem className="w-32 flex justify-center" isActive={currentRoute === '/home'}>
+                    <Tooltip
+                        content={
+                            <div className="px-1 py-2">
+                                <div className="text-md">Home</div>
+                            </div>
+                        }
+                        delay={0}
+                        closeDelay={0}
+                        offset={25}
+                    >
+                        <Link href="home">
+                            <HomeIcon color='#259d84' />
+                        </Link>
+                    </Tooltip>
+                </NavbarItem>
+                <NavbarItem className="w-32 flex justify-center" isActive={currentRoute === '/database'}>
+                    <Tooltip
+                        content={
+                            <div className="px-1 py-2">
+                                <div className="text-md">Database</div>
+                            </div>
+                        }
+                        delay={0}
+                        closeDelay={0}
+                        offset={25}
+                    >
+                        <Link href="database">
+                            <DatabaseIcon color='#259d84' />
+                        </Link>
+                    </Tooltip>
+                </NavbarItem>
+            </NavbarContent>
+            <NavbarContent className="hidden sm:flex gap-8" justify="end">
+                <NavbarItem>
+                    <Tooltip
+                        content={
+                            <div className="px-1 py-2">
+                                <div className="text-md">Add email</div>
+                            </div>
+                        }
+                        delay={0}
+                        closeDelay={0}
+                        offset={25}
+                    >
+                        <Link href="/add_email">
+                            <AddIcon />
+                        </Link>
+                    </Tooltip>
+                </NavbarItem>
+                <NavbarItem>
+                    <Tooltip
+                        content={
+                            <div className="px-1 py-2">
+                                <div className="text-md">Message</div>
+                            </div>
+                        }
+                        delay={0}
+                        closeDelay={0}
+                        offset={25}
+                    >
+                        <Link href="#">
+                            <MessageIcon color="#259d84" />
+                        </Link>
+                    </Tooltip>
+                </NavbarItem>
+                <NavbarItem>
+                    <Tooltip
+                        content={
+                            <div className="px-1 py-2">
+                                <div className="text-md">Notification</div>
+                            </div>
+                        }
+                        delay={0}
+                        closeDelay={0}
+                        offset={25}
+                    >
+                        <Link href="#">
+                            <NotificationIcon color="#259d84" />
+                        </Link>
+                    </Tooltip>
+                </NavbarItem>
+                <NavbarItem>
+                    <Dropdown placement="bottom-end">
+                        <DropdownTrigger>
+                            <Avatar
+                                className="transition-transform"
+                                style={{ boxShadow: '0 0 0 2px #259d84' }}
+                                name="Jason Hughes"
+                                size="md"
+                                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                            />
+                        </DropdownTrigger>
+                        <DropdownMenu variant="flat">
+                            <DropdownItem key="profile" className="h-14 gap-8" href="profile">
+                                <p className="font-semibold" >Signed in as</p>
+                                <p className="font-semibold">trongdatvuong@gmail.com</p>
+                            </DropdownItem>
+                            <DropdownItem key="settings">Settings</DropdownItem>
+                            <DropdownItem key="logout" color="danger" onPress={handleLogOut}>
+                                Log Out
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
+                </NavbarItem>
+            </NavbarContent>
+        </Navbar>
 
-  return (
-    <HeroUINavbar maxWidth="xl" position="sticky">
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">ACME</p>
-          </NextLink>
-        </NavbarBrand>
-        <ul className="hidden lg:flex gap-4 justify-start ml-2">
-          {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <NextLink
-                className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium",
-                )}
-                color="foreground"
-                href={item.href}
-              >
-                {item.label}
-              </NextLink>
-            </NavbarItem>
-          ))}
-        </ul>
-      </NavbarContent>
-
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden sm:flex gap-2">
-          <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
-            <TwitterIcon className="text-default-500" />
-          </Link>
-          <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
-            <DiscordIcon className="text-default-500" />
-          </Link>
-          <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-            <GithubIcon className="text-default-500" />
-          </Link>
-          <ThemeSwitch />
-        </NavbarItem>
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        <NavbarItem className="hidden md:flex">
-          <Button
-            isExternal
-            as={Link}
-            className="text-sm font-normal text-default-600 bg-default-100"
-            href={siteConfig.links.sponsor}
-            startContent={<HeartFilledIcon className="text-danger" />}
-            variant="flat"
-          >
-            Sponsor
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
-
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-          <GithubIcon className="text-default-500" />
-        </Link>
-        <ThemeSwitch />
-        <NavbarMenuToggle />
-      </NavbarContent>
-
-      <NavbarMenu>
-        {searchInput}
-        <div className="mx-4 mt-2 flex flex-col gap-2">
-          {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </div>
-      </NavbarMenu>
-    </HeroUINavbar>
-  );
-};
+    );
+}

@@ -8,15 +8,15 @@ export default function AuthLayout({
     return (
         <div
             style={{
-                display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw'
+                display: 'flex', flexDirection: 'column', width: '100%'
             }}
         >
-            <div className="w-full h-auto">
-                <NavigationBar />
+            <div className="w-full h-20">
+                <NavigationBar isAuthPage={false} />
             </div>
             <div
                 style={{
-                    display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw', alignItems: 'center', justifyContent: 'center'
+                    display: 'flex', flexDirection: 'column', height: 'auto', width: 'auto', paddingBottom: '20px', paddingRight: '20px', paddingLeft: '20px'
                 }}
             >{children}</div>
         </div >

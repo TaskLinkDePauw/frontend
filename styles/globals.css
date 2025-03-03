@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .gradient-button {
-    background: linear-gradient(to right, #30c2b7, #70e1a6, #96efc1);
+    background: linear-gradient(to right, #259d84, #30c2b7);
     color: #373737;
     border: none;
 }
@@ -14,8 +14,37 @@
     -webkit-text-fill-color: transparent;
 }
 
+.plain-green-color {
+    background: #259d84;
+}
+
+.bright-plain-green-color {
+    background: #e6ffe6;
+}
+
+
+.gradient-color {
+    background: linear-gradient(to right, #259d84, #30c2b7);
+}
+
 .brand-text {
     color: #259d84;
     font-weight: bold;
     font-size: 1.5rem;
+}
+
+.feed-title-text {
+    @apply text-default-800;
+    /* A1A1A8 */
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.navbar-size {
+    height: 4.5rem;
+}
+
+.sidebar-size {
+    width: 4.5rem;
+    height: 100%;
 }

@@ -3,7 +3,10 @@ interface Props {
     fill?: string;
     width?: number;
     height?: number;
+    color?: string;
 }
+
+
 
 export const EyeIcon = ({ fill, size, height, width, ...props }: Props) => {
     return (
