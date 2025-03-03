@@ -80,7 +80,7 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                         closeDelay={0}
                         offset={25}
                     >
-                        <Link href="dashboard">
+                        <Link href="home">
                             <HomeIcon color='#259d84' />
                         </Link>
                     </Tooltip>

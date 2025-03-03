@@ -10,7 +10,7 @@ export default function CreatePostPage() {
     const [isProcessing, setIsProcessing] = useState(false);
     const router = useRouter();
 
-    const handleSave = useCallback(
+    const handleContinue = useCallback(
         async () => {
             setIsProcessing(true);
             try {
@@ -61,7 +61,7 @@ export default function CreatePostPage() {
                     </CardBody>
                     <CardFooter >
                         <Button
-                            onPress={handleSave}
+                            onPress={handleContinue}
                             href="recommendation"
                             fullWidth isLoading={isProcessing} color="primary">
                             Continue

@@ -5,17 +5,19 @@ import { usePathname } from 'next/navigation';
 
 export default function PostMatchingLayout({
     children,
+    modal,
 }: Readonly<{
     children: React.ReactNode;
+    modal: React.ReactNode;
 }>) {
     const getStageFromUrl = () => {
         const currentRoute = usePathname()
         if (currentRoute.includes("create_post")) {
             return 1;
+        } else if (currentRoute.includes("recommendation/modal")) {
+            return 3;
         } else if (currentRoute.includes("recommendation")) {
             return 2;
-        } else if (currentRoute.includes("choose_date")) {
-            return 3;
         } else {
             return 4;
         }
@@ -33,7 +35,10 @@ export default function PostMatchingLayout({
                 style={{
                     display: 'flex', flexDirection: 'column', height: 'auto', width: 'auto', paddingBottom: '20px', paddingRight: '20px', paddingLeft: '20px'
                 }}
-            >{children}</div>
+            >
+                {modal}
+                {children}
+            </div>
         </div >
     );
 }

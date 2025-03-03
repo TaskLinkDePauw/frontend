@@ -18,6 +18,11 @@
     background: #259d84;
 }
 
+.bright-plain-green-color {
+    background: #e6ffe6;
+}
+
+
 .gradient-color {
     background: linear-gradient(to right, #259d84, #30c2b7);
 }

@@ -50,7 +50,8 @@ export const ProgressNavigationBar = ({ stage }: { stage: 1 | 2 | 3 | 4 }) => {
             className="px-28 bg-white"
         >
             <NavbarBrand className='max-w-40'>
-                <p className="brand-text">TaskLink</p>
+                <Link href="/home" className="brand-text">TaskLink
+                </Link>
             </NavbarBrand>
             <NavbarContent className="hidden sm:flex w-full justify-center">
                 <Progress

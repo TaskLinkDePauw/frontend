@@ -1,12 +1,33 @@
 'use client';
 
+import { StarIcon } from "@/components/icons/star-icon";
 import { Listbox, ListboxItem, Card, CardHeader, CardBody, Avatar, Divider, Button, CardFooter, Slider } from "@heroui/react";
-import { useState, } from "react";
+import { useState, useCallback } from "react";
+import { useRouter } from 'next/navigation';
 
-export default function CreFatePostPage() {
+export default function RecommendPage() {
+    const router = useRouter();
 
     const [selectedDateKey, setSelectedDateKey] = useState<string>("Today");
     const [selectedTimeKeys, setSelectedTimeKeys] = useState<Set<string>>(new Set());
+    const [isProcessing, setIsProcessing] = useState(false);
+
+    const handleContinue = useCallback(
+        async () => {
+            setIsProcessing(true);
+            try {
+                // Simulate saving post content
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                // Redirect to schedule page
+                router.replace('recommendation/schedule');
+            } catch (error) {
+                console.error("Failed to save post content", error);
+            } finally {
+                setIsProcessing(false);
+            }
+        },
+        []
+    );
 
     interface FilterDateKey {
         key: string;
@@ -49,6 +70,25 @@ export default function CreFatePostPage() {
             title: "Evening",
         },
     ]
+
+    const tasker = {
+        name: "Stephanie K.",
+        avatarUrl: "https://i.pravatar.cc/150?u=stephaniek", // or any image URL
+        rate: 60.91,
+        minHours: 2,
+        rating: 4.9,
+        reviewCount: 63,
+        tasksCount: 82,
+        overallTasksCount: 80,
+        description:
+            "Experienced airbnb cleaner. I can bring all supplies or use yours prefer. Fast and efficient. Feel free to ask questions!",
+        reviewAuthor: "Natalie O.",
+        reviewDate: "Sat, Feb 8",
+        reviewText:
+            "Stephanie was available much sooner than other Taskers. Very punctual and brought her own supplies. Worked quickly and communicated when she was almost finished so I could review the work. Details like fridge/microwave, baseboards, and vents were careful...",
+    };
+
+
     return (
         <div className="h-full flex-row flex gap-4 justify-center px-8">
             {/* Left side - Suggestion and Filter */}
@@ -124,110 +164,70 @@ export default function CreFatePostPage() {
             </div>
             {/* Middle side - Post and Feed Content */}
             <div className="w-1/2 flex flex-col gap-4">
-                {/* Post Content */}
-                <Card isPressable className="flex flex-col h-auto">
-                    <CardHeader className="px-4 flex gap-4">
-                        <Avatar
-                            radius="full"
-                            size="md"
-                            src="https://heroui.com/avatars/avatar-1.png"
-                        />
-                        <div className="flex flex-col items-start gap-1">
-                            <div className="text-small font-semibold leading-none text-default-600">Zoey Lang</div>
-                            <div className="text-small tracking-tight text-default-400">Feb 28 at 8:54 AM</div>
+                <Card className="w-full">
+                    {/* Header: Avatar + Basic Info */}
+                    <CardHeader className="flex gap-4 items-center">
+                        <Avatar className="w-20 h-20" src={tasker.avatarUrl} name={tasker.name} />
+                        <div>
+                            <h2 className="text-2xl font-bold leading-tight">{tasker.name}</h2>
+                            <p className="text-default-400 text-sm">{tasker.minHours} HOUR MINIMUM</p>
+                            <p className="text-md font-bold">${tasker.rate.toFixed(2)}/hr</p>
                         </div>
                     </CardHeader>
-                    <CardBody className="px-4 text-small text-default-400">
-                        <p>Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.</p>
-                    </CardBody>
-                    <CardFooter className="px-4 gap-3">
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">10</p>
-                            <p className=" text-default-400 text-small">Offers</p>
-                        </div>
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">100</p>
-                            <p className="text-default-400 text-small">Views</p>
-                        </div>
-                    </CardFooter>
-                </Card>
 
-                <Card isPressable className="flex flex-col h-auto">
-                    <CardHeader className="px-4 flex gap-4">
-                        <Avatar
-                            radius="full"
-                            size="md"
-                            src="https://heroui.com/avatars/avatar-1.png"
-                        />
-                        <div className="flex flex-col items-start gap-1">
-                            <div className="text-small font-semibold leading-none text-default-600">Zoey Lang</div>
-                            <div className="text-small tracking-tight text-default-400">Feb 28 at 8:54 AM</div>
+                    {/* Body: Rating, tasks, and description */}
+                    <CardBody className="flex flex-col gap-3">
+                        {/* Rating & tasks */}
+                        <div className="flex flex-col">
+                            <div className="flex items-center gap-1">
+                                {/* Hard-coded star icons, or map them dynamically */}
+                                {[...Array(5)].map((_, idx) => (
+                                    <StarIcon
+                                        key={idx}
+                                        height={18}
+                                        width={18}
+                                        color={idx < Math.round(tasker.rating) ? "#FACC15" : "#E5E7EB"}
+                                    />
+                                ))}
+                                <span className="text-sm text-default-400">
+                                    {tasker.rating} ({tasker.reviewCount} reviews)
+                                </span>
+                            </div>
+                            <p className="text-sm text-default-400">
+                                {tasker.tasksCount} Cleaning tasks<br />
+                                {tasker.overallTasksCount} Cleaning tasks overall
+                            </p>
                         </div>
-                    </CardHeader>
-                    <CardBody className="px-4 text-small text-default-400">
-                        <p>Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.</p>
+
+                        <Divider />
+
+                        {/* Description */}
+                        <p className="font-bold text-md">How I can help:</p>
+                        <p className="text-sm text-default-500 leading-normal">
+                            {tasker.description}
+                        </p>
+
+                        <Divider />
+
+                        {/* Latest review */}
+                        <div>
+                            <p className="text-sm text-default-600 font-bold mb-1">
+                                {tasker.reviewAuthor} on {tasker.reviewDate}
+                            </p>
+                            <p className="text-sm text-default-500 leading-normal">
+                                &quot;{tasker.reviewText}&quot;
+                            </p>
+                        </div>
                     </CardBody>
-                    <CardFooter className="px-4 gap-3">
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">10</p>
-                            <p className=" text-default-400 text-small">Offers</p>
-                        </div>
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">100</p>
-                            <p className="text-default-400 text-small">Views</p>
-                        </div>
-                    </CardFooter>
-                </Card>
-                <Card isPressable className="flex flex-col h-auto">
-                    <CardHeader className="px-4 flex gap-4">
-                        <Avatar
-                            radius="full"
-                            size="md"
-                            src="https://heroui.com/avatars/avatar-1.png"
-                        />
-                        <div className="flex flex-col items-start gap-1">
-                            <div className="text-small font-semibold leading-none text-default-600">Zoey Lang</div>
-                            <div className="text-small tracking-tight text-default-400">Feb 28 at 8:54 AM</div>
-                        </div>
-                    </CardHeader>
-                    <CardBody className="px-4 text-small text-default-400">
-                        <p>Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.</p>
-                    </CardBody>
-                    <CardFooter className="px-4 gap-3">
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">10</p>
-                            <p className=" text-default-400 text-small">Offers</p>
-                        </div>
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">100</p>
-                            <p className="text-default-400 text-small">Views</p>
-                        </div>
-                    </CardFooter>
-                </Card>
-                <Card isPressable className="flex flex-col h-auto">
-                    <CardHeader className="px-4 flex gap-4">
-                        <Avatar
-                            radius="full"
-                            size="md"
-                            src="https://heroui.com/avatars/avatar-1.png"
-                        />
-                        <div className="flex flex-col items-start gap-1">
-                            <div className="text-small font-semibold leading-none text-default-600">Zoey Lang</div>
-                            <div className="text-small tracking-tight text-default-400">Feb 28 at 8:54 AM</div>
-                        </div>
-                    </CardHeader>
-                    <CardBody className="px-4 text-small text-default-400">
-                        <p>Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.</p>
-                    </CardBody>
-                    <CardFooter className="px-4 gap-3">
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">10</p>
-                            <p className=" text-default-400 text-small">Offers</p>
-                        </div>
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">100</p>
-                            <p className="text-default-400 text-small">Views</p>
-                        </div>
+
+                    {/* Footer: Actions */}
+                    <CardFooter className="flex gap-2 justify-between">
+                        <Button variant="flat" color="default" className="flex-1">
+                            View Profile &amp; Reviews
+                        </Button>
+                        <Button onPress={handleContinue} variant="solid" className="plain-green-color text-white flex-1">
+                            Select &amp; Continue
+                        </Button>
                     </CardFooter>
                 </Card>
             </div>
