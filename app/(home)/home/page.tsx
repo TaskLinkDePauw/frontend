@@ -6,6 +6,7 @@ import { useState, useCallback } from "react";
 
 import { CarIcon } from "@/components/icons/car-icon";
 import { useRouter } from 'next/navigation';
+import { PostFeed } from "@/components/post_feed";
 
 type ProfileProps = {
     profile_name: string | undefined;
@@ -202,111 +203,49 @@ export default function HomePage() {
                     </CardFooter>
                 </Card>
                 {/* Post Content */}
-                <Card isPressable className="flex flex-col h-auto">
-                    <CardHeader className="px-4 flex gap-4">
-                        <Avatar
-                            radius="full"
-                            size="md"
-                            src="https://heroui.com/avatars/avatar-1.png"
-                        />
-                        <div className="flex flex-col items-start gap-1">
-                            <div className="text-small font-semibold leading-none text-default-600">Zoey Lang</div>
-                            <div className="text-small tracking-tight text-default-400">Feb 28 at 8:54 AM</div>
-                        </div>
-                    </CardHeader>
-                    <CardBody className="px-4 text-small text-default-400">
-                        <p>Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.</p>
-                    </CardBody>
-                    <CardFooter className="px-4 gap-3">
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">10</p>
-                            <p className=" text-default-400 text-small">Offers</p>
-                        </div>
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">100</p>
-                            <p className="text-default-400 text-small">Views</p>
-                        </div>
-                    </CardFooter>
-                </Card>
+                <PostFeed post={
+                    {
+                        id: "1",
+                        user: {
+                            name: "Zoey Lang",
+                            avatarUrl: "https://heroui.com/avatars/avatar-1.png",
+                        },
+                        date: "Feb 28 at 8:54 AM",
+                        status: "Active",
+                        description: "Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.",
+                        offers: 10,
+                        views: 100,
+                    }
+                } />
+                <PostFeed post={
+                    {
+                        id: "2",
+                        user: {
+                            name: "Zoey Lang",
+                            avatarUrl: "https://heroui.com/avatars/avatar-1.png",
+                        },
+                        date: "Feb 28 at 8:54 AM",
+                        status: "Active",
+                        description: "Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.",
+                        offers: 10,
+                        views: 100,
+                    }
+                } />
+                <PostFeed post={
+                    {
+                        id: "3",
+                        user: {
+                            name: "Zoey Lang",
+                            avatarUrl: "https://heroui.com/avatars/avatar-1.png",
+                        },
+                        date: "Feb 28 at 8:54 AM",
+                        status: "Active",
+                        description: "Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.",
+                        offers: 10,
+                        views: 100,
+                    }
+                } />
 
-                <Card isPressable className="flex flex-col h-auto">
-                    <CardHeader className="px-4 flex gap-4">
-                        <Avatar
-                            radius="full"
-                            size="md"
-                            src="https://heroui.com/avatars/avatar-1.png"
-                        />
-                        <div className="flex flex-col items-start gap-1">
-                            <div className="text-small font-semibold leading-none text-default-600">Zoey Lang</div>
-                            <div className="text-small tracking-tight text-default-400">Feb 28 at 8:54 AM</div>
-                        </div>
-                    </CardHeader>
-                    <CardBody className="px-4 text-small text-default-400">
-                        <p>Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.</p>
-                    </CardBody>
-                    <CardFooter className="px-4 gap-3">
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">10</p>
-                            <p className=" text-default-400 text-small">Offers</p>
-                        </div>
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">100</p>
-                            <p className="text-default-400 text-small">Views</p>
-                        </div>
-                    </CardFooter>
-                </Card>
-                <Card isPressable className="flex flex-col h-auto">
-                    <CardHeader className="px-4 flex gap-4">
-                        <Avatar
-                            radius="full"
-                            size="md"
-                            src="https://heroui.com/avatars/avatar-1.png"
-                        />
-                        <div className="flex flex-col items-start gap-1">
-                            <div className="text-small font-semibold leading-none text-default-600">Zoey Lang</div>
-                            <div className="text-small tracking-tight text-default-400">Feb 28 at 8:54 AM</div>
-                        </div>
-                    </CardHeader>
-                    <CardBody className="px-4 text-small text-default-400">
-                        <p>Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.</p>
-                    </CardBody>
-                    <CardFooter className="px-4 gap-3">
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">10</p>
-                            <p className=" text-default-400 text-small">Offers</p>
-                        </div>
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">100</p>
-                            <p className="text-default-400 text-small">Views</p>
-                        </div>
-                    </CardFooter>
-                </Card>
-                <Card isPressable className="flex flex-col h-auto">
-                    <CardHeader className="px-4 flex gap-4">
-                        <Avatar
-                            radius="full"
-                            size="md"
-                            src="https://heroui.com/avatars/avatar-1.png"
-                        />
-                        <div className="flex flex-col items-start gap-1">
-                            <div className="text-small font-semibold leading-none text-default-600">Zoey Lang</div>
-                            <div className="text-small tracking-tight text-default-400">Feb 28 at 8:54 AM</div>
-                        </div>
-                    </CardHeader>
-                    <CardBody className="px-4 text-small text-default-400">
-                        <p>Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.</p>
-                    </CardBody>
-                    <CardFooter className="px-4 gap-3">
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">10</p>
-                            <p className=" text-default-400 text-small">Offers</p>
-                        </div>
-                        <div className="flex gap-1">
-                            <p className="font-semibold text-default-400 text-small">100</p>
-                            <p className="text-default-400 text-small">Views</p>
-                        </div>
-                    </CardFooter>
-                </Card>
             </div>
             {/* Right side - Message and Contact */}
             <div className="w-1/5 flex flex-col gap-4">

@@ -1,6 +1,6 @@
 'use client';
 
-import { Input, Card, CardHeader, CardBody, Avatar, Divider, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Chip } from "@heroui/react";
+import { Input, Card, CardHeader, CardBody, Image, Avatar, Divider, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Chip } from "@heroui/react";
 import { LinkIcon, NameIcon, EmailIcon, PhoneIcon, EditIcon, EyeIcon, AddIcon, TrashIcon } from "@/components/icons/page";
 import { CldUploadWidget, CldOgImage, CldImage } from 'next-cloudinary';
 import { useState, useCallback, useEffect, useMemo, use } from "react";
@@ -53,15 +53,15 @@ export default function Profile() {
         }
     };
     const [profileInfo, setProfileInfo] = useState<ProfileProps>(
-        {
-            profile_name: "Dat Vuong",
-            full_name: "Dat Trong Vuong",
-            job_title: "Software Engineer",
-            email: "trongdatvuong@gmail.com",
-            phone: "765-712-2967",
-            avatar_url: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-            linkedIn: "https://www.linkedin.com/in/dat-vuong/",
-        }
+        // {
+        //     profile_name: "Dat Vuong",
+        //     full_name: "Dat Trong Vuong",
+        //     job_title: "Software Engineer",
+        //     email: "trongdatvuong@gmail.com",
+        //     phone: "765-712-2967",
+        //     avatar_url: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+        //     linkedIn: "https://www.linkedin.com/in/dat-vuong/",
+        // }
     );
 
     const handleSave = useCallback((title: string) => {
@@ -135,9 +135,9 @@ export default function Profile() {
         switch (title) {
             case "Contact":
                 return (
-                    <Modal isOpen={editModal.isOpen} onOpenChange={editModal.onOpenChange} size="5xl" scrollBehavior="inside">
+                    <Modal isOpen={editModal.isOpen} onOpenChange={editModal.onOpenChange} className="dark" size="5xl" scrollBehavior="inside">
                         <ModalContent>
-                            {(onClose) => (
+                            {() => (
                                 <>
                                     <ModalHeader className="flex flex-col gap-1">
                                         {title}
@@ -148,7 +148,7 @@ export default function Profile() {
                                         <Input variant="underlined" label="Phone" value={phone} onValueChange={setPhone} />
                                     </ModalBody>
                                     <ModalFooter>
-                                        <Button color="primary" onPress={handleSave(title)} isLoading={isSaving} >
+                                        <Button color="primary" onClick={handleSave(title)} isLoading={isSaving} >
                                             Save
                                         </Button>
                                     </ModalFooter>
@@ -159,9 +159,9 @@ export default function Profile() {
                 )
             case "Resume":
                 return (
-                    <Modal isOpen={editModal.isOpen} onOpenChange={editModal.onOpenChange} size="5xl" scrollBehavior="inside">
+                    <Modal isOpen={editModal.isOpen} onOpenChange={editModal.onOpenChange} className="dark" size="5xl" scrollBehavior="inside">
                         <ModalContent>
-                            {(onClose) => (
+                            {() => (
                                 <>
                                     <ModalHeader className="flex flex-col gap-1">
                                         {title}
@@ -189,7 +189,7 @@ export default function Profile() {
                 )
             case "LinkedIn":
                 return (
-                    <Modal isOpen={editModal.isOpen} onOpenChange={editModal.onOpenChange} size="5xl" scrollBehavior="inside">
+                    <Modal isOpen={editModal.isOpen} onOpenChange={editModal.onOpenChange} className="dark" size="5xl" scrollBehavior="inside">
                         <ModalContent>
                             {() => (
                                 <>
@@ -200,7 +200,7 @@ export default function Profile() {
                                         <Input defaultValue={profileInfo?.linkedIn} value={linkedin} onValueChange={setLinkedin} variant="underlined" />
                                     </ModalBody>
                                     <ModalFooter>
-                                        <Button color="primary" onPress={handleSave(title)} isLoading={isSaving} >
+                                        <Button color="primary" onClick={handleSave(title)} isLoading={isSaving} >
                                             Save
                                         </Button>
                                     </ModalFooter>
@@ -262,9 +262,9 @@ export default function Profile() {
     }, []);
 
     return (
-        <div className="h-full flex-row flex gap-4 justify-center px-8">
+        <div className="h-full dark flex-row flex gap-4 justify-center px-8">
             <Toaster />
-            <div className="w-1/5 flex flex-col gap-4">
+            <div className="w-1/4 flex flex-col gap-4">
                 <Card className=" px-8 py-16 flex-col justify-center items-center bg-gradient-to-r from-violet-500 to-indigo-500">
                     <CardHeader className="px-0 justify-end">
                         <Button isIconOnly aria-label="Edit" variant="light">
@@ -281,10 +281,10 @@ export default function Profile() {
                     <p className="font-bold text-xl">{profileInfo?.profile_name}</p>
                     <p className="text-sm">{profileInfo?.job_title}</p>
                 </Card>
-                <Card className=" px-8 py-8 flex-col justify-center">
+                <Card className=" px-8 py-8 flex-col justify-center dark">
                     <CardHeader className="px-0 flex-row justify-between">
                         <p className="font-bold text-xl">Contact</p>
-                        <Button isIconOnly aria-label="Edit" variant="light" onPress={() => handleEdit("Contact")}>
+                        <Button isIconOnly aria-label="Edit" variant="light" onClick={() => handleEdit("Contact")}>
                             <EditIcon height={20} width={20} />
                         </Button>
                     </CardHeader>
@@ -310,10 +310,10 @@ export default function Profile() {
                 </Card>
             </div>
             <div className="w-1/2 flex flex-col gap-4">
-                <Card className=" px-8 py-8 flex-col justify-center">
+                <Card className=" px-8 py-8 flex-col justify-center dark">
                     <CardHeader className="px-0 flex-row justify-between">
                         <p className="font-bold text-xl">Resume</p>
-                        <Button isIconOnly aria-label="Edit" variant="light" onPress={() => handleEdit('Resume')}>
+                        <Button isIconOnly aria-label="Edit" variant="light" onClick={() => handleEdit('Resume')}>
                             <EditIcon height={20} width={20} />
                         </Button>
                     </CardHeader>
@@ -326,13 +326,13 @@ export default function Profile() {
                                     <EyeIcon height={20} width={20} /> Preview
                                 </Button>
                                 <p key="fullName" className="text-md">{resumeInfo.resume_title}</p>
-                                <Modal scrollBehavior="inside" size="5xl" backdrop="blur" isOpen={previewModal.isOpen} onClose={previewModal.onClose}>
+                                <Modal scrollBehavior="inside" size="5xl" backdrop="blur" isOpen={previewModal.isOpen} onClose={previewModal.onClose} className="dark">
                                     <ModalContent>
                                         {(onClose) => (
                                             <>
-                                                <ModalHeader className="flex flex-col gap-1">{resumeInfo?.resume_title}</ModalHeader>
+                                                <ModalHeader className="flex flex-col gap-1">{[resumeInfo.resume_title]}</ModalHeader>
                                                 <ModalBody>
-                                                    <CldImage width="960" height="600" src={resumeInfo?.resume_public_id ?? ""} alt="Resume" />
+                                                    <CldImage width="960" height="600" src={resumeInfo.resume_public_id ?? ""} alt="Resume" />
                                                 </ModalBody>
                                                 <ModalFooter>
                                                     <Button color="danger" variant="light" onPress={onClose}>
@@ -365,7 +365,7 @@ export default function Profile() {
                             >
                                 {({ open }) => {
                                     return (
-                                        <Button onPress={() => open()}>
+                                        <Button onClick={() => open()}>
                                             <AddIcon height={20} width={20} />
                                             Upload Resume
                                         </Button>
@@ -375,10 +375,10 @@ export default function Profile() {
                             </CldUploadWidget>}
                     </CardBody>
                 </Card>
-                <Card className=" px-8 py-8 flex-col justify-center">
+                <Card className=" px-8 py-8 flex-col justify-center dark">
                     <CardHeader className="px-0 flex-row justify-between">
                         <p className="font-bold text-xl">LinkedIn</p>
-                        <Button isIconOnly aria-label="Edit" variant="light" onPress={() => handleEdit('LinkedIn')}>
+                        <Button isIconOnly aria-label="Edit" variant="light" onClick={() => handleEdit('LinkedIn')}>
                             <EditIcon height={20} width={20} />
                         </Button>
                     </CardHeader>
@@ -399,7 +399,7 @@ export default function Profile() {
                         </div>
                     </CardBody>
                 </Card>
-                <Card className=" px-8 py-8 flex-col justify-center">
+                <Card className=" px-8 py-8 flex-col justify-center dark">
                     <CardHeader className="px-0 flex-row justify-between">
                         <p className="font-bold text-xl">Skills</p>
                         <Button isIconOnly aria-label="Edit" variant="light">
@@ -412,51 +412,6 @@ export default function Profile() {
                             {skills.map((skill: string) => (
                                 <Chip key={skill} onClose={() => handleClose(skill)}>{skill}</Chip>
                             ))}
-                        </div>
-                    </CardBody>
-                </Card>
-            </div>
-            <div className="w-1/5 flex flex-col gap-4">
-                <Card className=" px-8 py-16 flex-col justify-center items-center bg-gradient-to-r from-violet-500 to-indigo-500">
-                    <CardHeader className="px-0 justify-end">
-                        <Button isIconOnly aria-label="Edit" variant="light">
-                            <EditIcon height={20} width={20} />
-                        </Button>
-                    </CardHeader>
-                    <div className="pb-4">
-                        <Avatar
-                            className="w-30 h-30"
-                            name="Jason Hughes"
-                            src={profileInfo?.avatar_url}
-                        />
-                    </div>
-                    <p className="font-bold text-xl">{profileInfo?.profile_name}</p>
-                    <p className="text-sm">{profileInfo?.job_title}</p>
-                </Card>
-                <Card className=" px-8 py-8 flex-col justify-center">
-                    <CardHeader className="px-0 flex-row justify-between">
-                        <p className="font-bold text-xl">Contact</p>
-                        <Button isIconOnly aria-label="Edit" variant="light" onPress={() => handleEdit("Contact")}>
-                            <EditIcon height={20} width={20} />
-                        </Button>
-                    </CardHeader>
-                    <Divider />
-                    <CardBody className="px-0 flex-col items-start">
-                        <div className="flex flex-row gap-4 justify-center items-center">
-                            <NameIcon height={20} width={20} />
-                            <p key="fullName" className="text-md">{profileInfo?.full_name}</p>
-                        </div>
-                        <div className="flex flex-row gap-4 justify-center items-center">
-                            <EmailIcon height={20} width={20} />
-                            <p key="fullName" className="text-md">{profileInfo?.email}</p>
-                        </div>
-                        <div className="flex flex-row gap-4 justify-center items-center">
-                            {profileInfo?.phone !== undefined ?
-                                <>
-                                    <PhoneIcon height={20} width={20} />
-                                    <p key="fullName" className="text-md">{profileInfo.phone}</p>
-                                </> : null
-                            }
                         </div>
                     </CardBody>
                 </Card>

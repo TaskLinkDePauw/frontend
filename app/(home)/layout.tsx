@@ -1,8 +1,10 @@
 import { NavigationBar } from "@/components/navbar";
 
-export default function AuthLayout({
+export default function HomeLayout({
+    modal,
     children,
 }: Readonly<{
+    modal: React.ReactNode;
     children: React.ReactNode;
 }>) {
     return (
@@ -18,7 +20,10 @@ export default function AuthLayout({
                 style={{
                     display: 'flex', flexDirection: 'column', height: 'auto', width: 'auto', paddingBottom: '20px', paddingRight: '20px', paddingLeft: '20px'
                 }}
-            >{children}</div>
+            >
+                {modal}
+                {children}
+            </div>
         </div >
     );
 }

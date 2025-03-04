@@ -17,14 +17,11 @@ export const loginUser = async (loginUserInput: LoginUserInput) => {
             body: JSON.stringify(loginUserInput),
         });
         const data = await response.json();
-        if (response.ok) {
+        if (response) {
             const cookieStore = await cookies();
-            cookieStore.set('access_token', data.access_token);
-            cookieStore.set('refresh_token', data.refresh_token);
-            cookieStore.set('user_id', data.user.id);
+            cookieStore.set('user_id', data.id);
         }
-
-        return { data, ok: response.ok };
+        return { data };
     } catch (error) {
         console.error('Error logging in:', error);
         throw error;

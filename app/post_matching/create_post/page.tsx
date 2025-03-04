@@ -2,11 +2,16 @@
 
 import { Textarea, Card, CardHeader, CardBody, Avatar, Divider, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Accordion, AccordionItem, Button, useDisclosure, Chip, CardFooter, User } from "@heroui/react";
 import { useState, useCallback } from "react";
-import Link from "next/link";
 import { useRouter } from 'next/navigation';
+import { usePostMatchingContext } from "../layout";
 
 export default function CreatePostPage() {
-    const [postContent, setPostContent] = useState("");
+    const postMatchingContext = usePostMatchingContext();
+    if (!postMatchingContext) {
+        return <div>Error: PostMatchingContext is null</div>;
+    }
+    const { content, setContent } = postMatchingContext;
+
     const [isProcessing, setIsProcessing] = useState(false);
     const router = useRouter();
 
@@ -27,10 +32,6 @@ export default function CreatePostPage() {
         []
     );
 
-    // useEffect(() => {
-    //     queryProfile();
-    // }, []);
-
     return (
         <div className="h-full flex-row flex gap-4 justify-center px-8">
             <div className="w-1/2 flex flex-col gap-4 p-8">
@@ -49,21 +50,20 @@ export default function CreatePostPage() {
                     </CardHeader>
                     <CardBody className="px-4 text-small text-default-400">
                         <Textarea
-                            placeholder="Enter your post content"
+                            placeholder="Write your post"
                             variant="underlined"
-                            value={postContent}
+                            value={content}
                             className="w-full h-full text-default-600"
                             size="lg"
                             minRows={10}
                             maxRows={10}
-                            onValueChange={setPostContent}
+                            onValueChange={setContent}
                         />
                     </CardBody>
                     <CardFooter >
                         <Button
                             onPress={handleContinue}
-                            href="recommendation"
-                            fullWidth isLoading={isProcessing} color="primary">
+                            fullWidth isLoading={isProcessing} className="plain-green-color text-white" >
                             Continue
                         </Button>
                     </CardFooter>

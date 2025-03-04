@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .gradient-button {
-    background: linear-gradient(to right, #259d84, #30c2b7);
+    background: linear-gradient(to right, #B98AE8, #733ff9);
     color: #373737;
     border: none;
 }
@@ -15,20 +15,20 @@
 }
 
 .plain-green-color {
-    background: #259d84;
+    background: #733ff9;
 }
 
 .bright-plain-green-color {
-    background: #e6ffe6;
+    background: #B98AE8;
 }
 
 
 .gradient-color {
-    background: linear-gradient(to right, #259d84, #30c2b7);
+    background: linear-gradient(to right, #B98AE8, #733ff9);
 }
 
 .brand-text {
-    color: #259d84;
+    color: #733ff9;
     font-weight: bold;
     font-size: 1.5rem;
 }
@@ -47,4 +47,8 @@
 .sidebar-size {
     width: 4.5rem;
     height: 100%;
+}
+
+.icon-color {
+    color: #733ff9;
 }
