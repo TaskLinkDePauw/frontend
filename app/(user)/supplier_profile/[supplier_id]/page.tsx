@@ -13,7 +13,11 @@ import { PhoneIcon, GlobeIcon, StarIcon } from "@/components/icons/page";
 import { useState } from "react";
 import Link from "next/link";
 
-export default function SupplierProfile() {
+interface Params {
+    supplier_id: string;
+}
+
+export default function SupplierProfile({ params }: { params: Params }) {
     const [supplierInfo] = useState({
         name: "Elite Affordable Movers & Cleaning",
         rating: 4.3,

@@ -13,11 +13,7 @@ import {
 } from "@heroui/react";
 import { useState, useCallback, useEffect } from "react";
 import { Calendar } from "@heroui/react";
-import { today, getLocalTimeZone, parseDate } from "@internationalized/date";
-
-import ModalPage from "@/app/post_matching/recommendation/schedule/page";
 import { useRouter, usePathname } from "next/navigation"
-
 
 export default function ScheduleModalPage() {
     const router = useRouter();

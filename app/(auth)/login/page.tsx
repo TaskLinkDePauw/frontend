@@ -25,12 +25,12 @@ export default function LoginPage() {
             setIsLoading(true);
             const result = await loginUser({ username, password });
             if (result) {
-                const { ok, data }: { ok: boolean, data: any } = result;
-                if (ok) {
+                const { data }: { data: any } = result;
+                if (data) {
                     console.log("successful signup");
                     toast.success("Login successful");
                     setTimeout(() => {
-                        router.replace("/database");
+                        router.replace("/home");
                         setIsLoading(false);
                     }, 2000);
                 } else {

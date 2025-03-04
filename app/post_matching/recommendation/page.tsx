@@ -2,32 +2,22 @@
 
 import { StarIcon } from "@/components/icons/star-icon";
 import { Listbox, ListboxItem, Card, CardHeader, CardBody, Avatar, Divider, Button, CardFooter, Slider } from "@heroui/react";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useRouter } from 'next/navigation';
+import { RecommendedSupplier } from "@/components/recommended_supplier";
+import { usePostMatchingContext } from "../layout";
+import { matchPost } from "@/services/post";
 
 export default function RecommendPage() {
-    const router = useRouter();
+    const postMatchingContext = usePostMatchingContext();
+
+    if (!postMatchingContext) {
+        return <div>Error: PostMatchingContext is null</div>;
+    }
+    const { content } = postMatchingContext;
 
     const [selectedDateKey, setSelectedDateKey] = useState<string>("Today");
     const [selectedTimeKeys, setSelectedTimeKeys] = useState<Set<string>>(new Set());
-    const [isProcessing, setIsProcessing] = useState(false);
-
-    const handleContinue = useCallback(
-        async () => {
-            setIsProcessing(true);
-            try {
-                // Simulate saving post content
-                await new Promise((resolve) => setTimeout(resolve, 1000));
-                // Redirect to schedule page
-                router.replace('recommendation/schedule');
-            } catch (error) {
-                console.error("Failed to save post content", error);
-            } finally {
-                setIsProcessing(false);
-            }
-        },
-        []
-    );
 
     interface FilterDateKey {
         key: string;
@@ -72,6 +62,7 @@ export default function RecommendPage() {
     ]
 
     const tasker = {
+        id: "1",
         name: "Stephanie K.",
         avatarUrl: "https://i.pravatar.cc/150?u=stephaniek", // or any image URL
         rate: 60.91,
@@ -88,6 +79,16 @@ export default function RecommendPage() {
             "Stephanie was available much sooner than other Taskers. Very punctual and brought her own supplies. Worked quickly and communicated when she was almost finished so I could review the work. Details like fridge/microwave, baseboards, and vents were careful...",
     };
 
+    const queryMatchingSupplier = async () => {
+        const data = await matchPost(content);
+        console.log(data);
+        // Query the matching supplier based on the selectedDateKey and selectedTimeKeys
+    };
+
+    useEffect(() => {
+        queryMatchingSupplier();
+    }
+        , []);
 
     return (
         <div className="h-full flex-row flex gap-4 justify-center px-8">
@@ -162,74 +163,10 @@ export default function RecommendPage() {
                     </CardBody>
                 </Card>
             </div>
-            {/* Middle side - Post and Feed Content */}
+            {/* Middle side - Supplier Content */}
             <div className="w-1/2 flex flex-col gap-4">
-                <Card className="w-full">
-                    {/* Header: Avatar + Basic Info */}
-                    <CardHeader className="flex gap-4 items-center">
-                        <Avatar className="w-20 h-20" src={tasker.avatarUrl} name={tasker.name} />
-                        <div>
-                            <h2 className="text-2xl font-bold leading-tight">{tasker.name}</h2>
-                            <p className="text-default-400 text-sm">{tasker.minHours} HOUR MINIMUM</p>
-                            <p className="text-md font-bold">${tasker.rate.toFixed(2)}/hr</p>
-                        </div>
-                    </CardHeader>
-
-                    {/* Body: Rating, tasks, and description */}
-                    <CardBody className="flex flex-col gap-3">
-                        {/* Rating & tasks */}
-                        <div className="flex flex-col">
-                            <div className="flex items-center gap-1">
-                                {/* Hard-coded star icons, or map them dynamically */}
-                                {[...Array(5)].map((_, idx) => (
-                                    <StarIcon
-                                        key={idx}
-                                        height={18}
-                                        width={18}
-                                        color={idx < Math.round(tasker.rating) ? "#FACC15" : "#E5E7EB"}
-                                    />
-                                ))}
-                                <span className="text-sm text-default-400">
-                                    {tasker.rating} ({tasker.reviewCount} reviews)
-                                </span>
-                            </div>
-                            <p className="text-sm text-default-400">
-                                {tasker.tasksCount} Cleaning tasks<br />
-                                {tasker.overallTasksCount} Cleaning tasks overall
-                            </p>
-                        </div>
-
-                        <Divider />
-
-                        {/* Description */}
-                        <p className="font-bold text-md">How I can help:</p>
-                        <p className="text-sm text-default-500 leading-normal">
-                            {tasker.description}
-                        </p>
-
-                        <Divider />
-
-                        {/* Latest review */}
-                        <div>
-                            <p className="text-sm text-default-600 font-bold mb-1">
-                                {tasker.reviewAuthor} on {tasker.reviewDate}
-                            </p>
-                            <p className="text-sm text-default-500 leading-normal">
-                                &quot;{tasker.reviewText}&quot;
-                            </p>
-                        </div>
-                    </CardBody>
-
-                    {/* Footer: Actions */}
-                    <CardFooter className="flex gap-2 justify-between">
-                        <Button variant="flat" color="default" className="flex-1">
-                            View Profile &amp; Reviews
-                        </Button>
-                        <Button onPress={handleContinue} variant="solid" className="plain-green-color text-white flex-1">
-                            Select &amp; Continue
-                        </Button>
-                    </CardFooter>
-                </Card>
+                <RecommendedSupplier supplier={tasker} />
+                <RecommendedSupplier supplier={tasker} />
             </div>
         </div >
     );

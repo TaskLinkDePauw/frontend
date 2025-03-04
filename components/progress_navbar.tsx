@@ -2,10 +2,8 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import {
-    Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Avatar, Tooltip,
-    Progress
+    Image, Navbar, NavbarBrand, NavbarContent, Link, Progress
 } from "@heroui/react";
-import { HomeIcon, AddIcon, ProfileIcon, DatabaseIcon, NotificationIcon, MessageIcon } from "./icons/page";
 import { logoutUser } from '@/services/auth';
 
 export const ProgressNavigationBar = ({ stage }: { stage: 1 | 2 | 3 | 4 }) => {
@@ -49,8 +47,9 @@ export const ProgressNavigationBar = ({ stage }: { stage: 1 | 2 | 3 | 4 }) => {
         <Navbar isBlurred={false} maxWidth="full" position='sticky'
             className="px-28 bg-white"
         >
-            <NavbarBrand className='max-w-40'>
-                <Link href="/home" className="brand-text">TaskLink
+            <NavbarBrand className='max-w-40 items-center flex-row gap-4'>
+                <Image src="https://res.cloudinary.com/dl8zstpix/image/upload/v1741056418/kontask_logo_hsxljn.png" alt="KonTask" width="auto" height={40} />
+                <Link href="/home" className="brand-text">KONTASK
                 </Link>
             </NavbarBrand>
             <NavbarContent className="hidden sm:flex w-full justify-center">
