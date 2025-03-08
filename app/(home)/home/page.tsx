@@ -2,27 +2,19 @@
 
 import { Listbox, ListboxItem, Input, Card, CardHeader, CardBody, Avatar, Divider, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Accordion, AccordionItem, Button, useDisclosure, Chip, CardFooter, User } from "@heroui/react";
 import { EditIcon, WrenchIcon, PaintIcon, ThreeDotVerticleIcon, ClockIcon, StickIcon, ImageIcon, VideoIcon, AIIdeaIcon, WarningIcon } from "@/components/icons/page";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 import { CarIcon } from "@/components/icons/car-icon";
 import { useRouter } from 'next/navigation';
 import { PostFeed } from "@/components/post_feed";
+import { getPostsByUserID, getUser } from "@/services/home";
+import { profile } from "console";
 
 type ProfileProps = {
-    profile_name: string | undefined;
-    full_name: string | undefined;
-    job_title: string | undefined;
-    email: string | undefined;
-    phone: string | undefined;
-    avatar_url: string | undefined;
-    linkedIn: string | undefined;
-} | undefined;
-
-type ResumeProps = {
-    resume_public_id: string | undefined;
-    resume_title: string | undefined;
-    resume_pdf_url: string | undefined;
-} | undefined;
+    full_name: string;
+    email: string;
+    avatar_url: string;
+};
 
 const initialSkills = ["C++", "React", "NextJS", "mongoDB"];
 
@@ -35,7 +27,7 @@ export default function HomePage() {
                 // Simulate saving post content
                 await new Promise((resolve) => setTimeout(resolve, 1000));
                 // Redirect to recommendation page
-                router.replace('post_matching/create_post');
+                router.replace('create_post');
             } catch (error) {
                 console.error("Failed to save post content", error);
             } finally {
@@ -43,18 +35,40 @@ export default function HomePage() {
         },
         []
     );
-
     const [profileInfo, setProfileInfo] = useState<ProfileProps>(
         {
-            profile_name: "Dat Vuong",
             full_name: "Dat Trong Vuong",
-            job_title: "Software Engineer",
             email: "trongdatvuong@gmail.com",
-            phone: "765-712-2967",
-            avatar_url: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-            linkedIn: "https://www.linkedin.com/in/dat-vuong/",
+            avatar_url: "http://www.gravatar.com/avatar/?d=mp",
         }
     );
+
+    const queryPost = async () => {
+        const data = await getPostsByUserID();
+        console.log(data);
+        // Query the matching supplier based on the selectedDateKey and selectedTimeKeys
+    };
+
+    const queryUser = async () => {
+        const user = await getUser();
+        if (user.data.detail === undefined) {
+            setProfileInfo(
+                {
+                    full_name: user.data?.full_name,
+                    email: user.data?.email,
+                    avatar_url: user.data?.avatar_url,
+                }
+            );
+        }
+
+        // Query the matching supplier based on the selectedDateKey and selectedTimeKeys
+    };
+    useEffect(() => {
+        queryPost();
+        queryUser();
+    }
+        , []);
+
 
     const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
 
@@ -117,20 +131,14 @@ export default function HomePage() {
             {/* Left side - Suggestion and Filter */}
             <div className="w-1/6 flex flex-col gap-4">
                 <Card className=" px-8 py-16 flex-col justify-center items-center gradient-button ">
-                    <CardHeader className="px-0 justify-end">
-                        <Button isIconOnly aria-label="Edit" variant="light">
-                            <EditIcon height={20} width={20} />
-                        </Button>
-                    </CardHeader>
                     <div className="pb-4">
                         <Avatar
                             className="w-30 h-30"
-                            name="Jason Hughes"
+                            name={profileInfo?.full_name}
                             src={profileInfo?.avatar_url}
                         />
                     </div>
-                    <p className="font-bold text-xl">{profileInfo?.profile_name}</p>
-                    <p className="text-sm">{profileInfo?.job_title}</p>
+                    <p className="font-bold text-xl">{profileInfo?.full_name}</p>
                 </Card>
                 <Card className="flex-col justify-center">
                     <CardHeader className="px-4 flex-row justify-between" >
@@ -180,7 +188,7 @@ export default function HomePage() {
                         <Avatar
                             radius="full"
                             size="md"
-                            src="https://heroui.com/avatars/avatar-1.png"
+                            src={profileInfo?.avatar_url}
                         />
                         <Button onPress={handleCreatePost} className="h-full justify-start text-default-400" radius="full" variant="bordered" fullWidth aria-label="Edit" size='lg'>
                             Start a Post
@@ -207,42 +215,42 @@ export default function HomePage() {
                     {
                         id: "1",
                         user: {
-                            name: "Zoey Lang",
-                            avatarUrl: "https://heroui.com/avatars/avatar-1.png",
+                            name: profileInfo.full_name,
+                            avatarUrl: profileInfo.avatar_url,
                         },
                         date: "Feb 28 at 8:54 AM",
                         status: "Active",
-                        description: "Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.",
-                        offers: 10,
-                        views: 100,
+                        description: "Finding a reliable local driver to Walmart",
+                        offers: 2,
+                        views: 12,
                     }
                 } />
                 <PostFeed post={
                     {
                         id: "2",
                         user: {
-                            name: "Zoey Lang",
-                            avatarUrl: "https://heroui.com/avatars/avatar-1.png",
+                            name: profileInfo.full_name,
+                            avatarUrl: profileInfo.avatar_url,
                         },
-                        date: "Feb 28 at 8:54 AM",
+                        date: "Feb 27 at 4:54 PM",
                         status: "Active",
-                        description: "Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.",
-                        offers: 10,
-                        views: 100,
+                        description: "I need my nails done for a wedding",
+                        offers: 3,
+                        views: 20,
                     }
                 } />
                 <PostFeed post={
                     {
                         id: "3",
                         user: {
-                            name: "Zoey Lang",
-                            avatarUrl: "https://heroui.com/avatars/avatar-1.png",
+                            name: profileInfo.full_name,
+                            avatarUrl: profileInfo.avatar_url,
                         },
-                        date: "Feb 28 at 8:54 AM",
+                        date: "Feb 26 at 2:12 PM",
                         status: "Active",
-                        description: "Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.",
-                        offers: 10,
-                        views: 100,
+                        description: "Find a software engineer for startup idea.",
+                        offers: 6,
+                        views: 8,
                     }
                 } />
 

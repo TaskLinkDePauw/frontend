@@ -5,21 +5,15 @@ import { Card, CardHeader, CardBody, CardFooter, Avatar, Button, Divider } from 
 import { useRouter } from 'next/navigation';
 import { useState, useCallback } from "react";
 import { StarIcon } from "@/components/icons/star-icon";
+import { AIIdeaIcon } from './icons/ai-idea-icon';
 
 interface Supplier {
     id: string;
     name: string;
     avatarUrl: string;
-    rate: number;
-    minHours: number;
     rating: number;
-    reviewCount: number;
-    tasksCount: number;
-    overallTasksCount: number;
     description: string;
-    reviewAuthor: string;
-    reviewDate: string;
-    reviewText: string;
+    reasoning: string;
 }
 
 export const RecommendedSupplier = ({ supplier }: { supplier: Supplier }) => {
@@ -63,8 +57,7 @@ export const RecommendedSupplier = ({ supplier }: { supplier: Supplier }) => {
                 <Avatar className="w-20 h-20" src={supplier.avatarUrl} name={supplier.name} />
                 <div>
                     <h2 className="text-2xl font-bold leading-tight">{supplier.name}</h2>
-                    <p className="text-default-400 text-sm">{supplier.minHours} HOUR MINIMUM</p>
-                    <p className="text-md font-bold">${supplier.rate.toFixed(2)}/hr</p>
+                    <p className="text-md font-bold">$36.13/hr</p>
                 </div>
             </CardHeader>
 
@@ -79,17 +72,13 @@ export const RecommendedSupplier = ({ supplier }: { supplier: Supplier }) => {
                                 key={idx}
                                 height={18}
                                 width={18}
-                                color={idx < Math.round(supplier.rating) ? "#FACC15" : "#E5E7EB"}
+                                color={idx < Math.round(supplier.rating) ? "#733ff9" : "#E5E7EB"}
                             />
                         ))}
                         <span className="text-sm text-default-400">
-                            {supplier.rating} ({supplier.reviewCount} reviews)
+                            {supplier.rating}
                         </span>
                     </div>
-                    <p className="text-sm text-default-400">
-                        {supplier.tasksCount} Cleaning tasks<br />
-                        {supplier.overallTasksCount} Cleaning tasks overall
-                    </p>
                 </div>
 
                 <Divider />
@@ -102,13 +91,16 @@ export const RecommendedSupplier = ({ supplier }: { supplier: Supplier }) => {
 
                 <Divider />
 
-                {/* Latest review */}
+                {/* Reasoning for recommendation */}
                 <div>
-                    <p className="text-sm text-default-600 font-bold mb-1">
-                        {supplier.reviewAuthor} on {supplier.reviewDate}
-                    </p>
+                    <div className="flex flex-row items-center gap-1">
+                        <AIIdeaIcon height={18} width={18} color="#733ff9" />
+                        <p className="text-sm text-default-600 font-bold mb-1">
+                            Why this supplier is recommended:
+                        </p>
+                    </div>
                     <p className="text-sm text-default-500 leading-normal">
-                        &quot;{supplier.reviewText}&quot;
+                        {supplier.reasoning}
                     </p>
                 </div>
             </CardBody>

@@ -22,7 +22,7 @@ export default function ScheduleModalPage() {
     const [date, setDate] = useState<CalendarDate | null | undefined>();
     const [timeSlot, setTimeSlot] = useState();
     useEffect(() => {
-        if (currentRoute === "/post_matching/recommendation/schedule")
+        if (currentRoute === "/recommendation/schedule")
             onOpen();
     }, [currentRoute]);
 
@@ -96,12 +96,12 @@ export default function ScheduleModalPage() {
     };
 
     const handleContinue = useCallback(() => {
-        router.replace("/post_matching/confirm");
+        router.replace("/confirm");
         onClose();
     }, []);
 
     const handleClose = useCallback(() => {
-        router.replace("/post_matching/recommendation");
+        router.replace("/recommendation");
         onClose();
     }, []);
 
@@ -117,10 +117,10 @@ export default function ScheduleModalPage() {
                                     <Avatar
                                         radius="full"
                                         size="md"
-                                        src="https://heroui.com/avatars/avatar-1.png"
+                                        src="https://i.pravatar.cc/150?u=f0d115b0b717adbf2c4c"
                                     />
                                     <div className="flex flex-col items-start justify-center gap-1">
-                                        <div className="text-small font-semibold leading-none text-default-600">Zoey Lang</div>
+                                        <div className="text-small font-semibold leading-none text-default-600">Mike Johnson</div>
                                         <div className="text-small tracking-tight text-default-400">Available Time</div>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@ export default function ScheduleModalPage() {
                                 </div>
                                 <Button
                                     fullWidth
-                                    color="primary"
+                                    className="plain-green-color text-white"
                                     variant="solid"
                                     onPress={handleContinue}
                                     isDisabled={!date || !timeSlot}

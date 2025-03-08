@@ -25,7 +25,8 @@ export const PostFeed = ({ post }: { post: Post }) => {
     const handleOnPressPost = useCallback(
         async () => {
             try {
-                // Redirect to recommendation page
+                // Redirect to recommendation page]
+                console.log()
                 router.replace(`/home/${post.id}`);
             } catch (error) {
                 console.error("Failed to open post content", error);
@@ -48,7 +49,7 @@ export const PostFeed = ({ post }: { post: Post }) => {
                     <div className="text-small tracking-tight text-default-400">{post.date}</div>
                 </div>
             </CardHeader>
-            <CardBody className="px-4 text-small text-default-400">
+            <CardBody className="px-4 text-small text-default-600">
                 <p>{post.description}</p>
             </CardBody>
             <CardFooter className="px-4 gap-3">

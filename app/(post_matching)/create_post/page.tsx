@@ -1,9 +1,16 @@
 'use client';
 
 import { Textarea, Card, CardHeader, CardBody, Avatar, Divider, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Accordion, AccordionItem, Button, useDisclosure, Chip, CardFooter, User } from "@heroui/react";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { usePostMatchingContext } from "../layout";
+import { getUser } from "@/services/home";
+
+type ProfileProps = {
+    full_name: string;
+    email: string;
+    avatar_url: string;
+};
 
 export default function CreatePostPage() {
     const postMatchingContext = usePostMatchingContext();
@@ -31,6 +38,31 @@ export default function CreatePostPage() {
         },
         []
     );
+    const [profileInfo, setProfileInfo] = useState<ProfileProps>(
+        {
+            full_name: "Dat Trong Vuong",
+            email: "trongdatvuong@gmail.com",
+            avatar_url: "http://www.gravatar.com/avatar/?d=mp",
+        }
+    );
+    const queryUser = async () => {
+        const user = await getUser();
+        if (user.data.detail === undefined) {
+            setProfileInfo(
+                {
+                    full_name: user.data?.full_name,
+                    email: user.data?.email,
+                    avatar_url: user.data?.avatar_url,
+                }
+            );
+        }
+
+        // Query the matching supplier based on the selectedDateKey and selectedTimeKeys
+    };
+    useEffect(() => {
+        queryUser();
+    }
+        , []);
 
     return (
         <div className="h-full flex-row flex gap-4 justify-center px-8">
@@ -41,11 +73,11 @@ export default function CreatePostPage() {
                         <Avatar
                             radius="full"
                             size="md"
-                            src="https://heroui.com/avatars/avatar-1.png"
+                            src={profileInfo.avatar_url}
                         />
                         <div className="flex flex-col items-start gap-1">
-                            <div className="text-small font-semibold leading-none text-default-600">Zoey Lang</div>
-                            <div className="text-small tracking-tight text-default-400">Feb 28 at 8:54 AM</div>
+                            <div className="text-small font-semibold leading-none text-default-600">{profileInfo.full_name}</div>
+                            <div className="text-small tracking-tight text-default-400"> {new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })}</div>
                         </div>
                     </CardHeader>
                     <CardBody className="px-4 text-small text-default-400">

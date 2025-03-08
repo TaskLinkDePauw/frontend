@@ -17,8 +17,10 @@ export const NavigationBar = ({ isAuthPage = true }) => {
     }
     return isAuthPage ? (
         <Navbar isBlurred isBordered maxWidth="full" height="4.5rem">
-            <NavbarBrand>
-                <p className="brand-text">TaskLink</p>
+            <NavbarBrand className="items-center flex-row gap-4">
+                <Image src="https://res.cloudinary.com/dl8zstpix/image/upload/v1741056418/kontask_logo_hsxljn.png" alt="KonTask" width="auto" height={40} />
+                <Link href="/home" className="brand-text">KONTASK
+                </Link>
             </NavbarBrand>
             <NavbarContent justify="end">
                 <NavbarItem>
@@ -71,7 +73,7 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                         </Link>
                     </Tooltip>
                 </NavbarItem>
-                <NavbarItem className="w-32 flex justify-center" isActive={currentRoute === '/home'}>
+                <NavbarItem className="w-32 flex justify-center" isActive={currentRoute.includes('/home')}>
                     <Tooltip
                         content={
                             <div className="px-1 py-2">
