@@ -38,11 +38,11 @@ export default function SignUpPage() {
     const handleSignup = useCallback(
         async () => {
             setIsLoading(true);
-            const result = await createUser({ username, password, email, fullName });
+            const result = await createUser({ username, password, email, full_name: fullName });
             if (result) {
-                const { ok, data }: { ok: boolean, data: any } = result;
+                const { data }: { data: any } = result;
                 console.log(data);
-                if (ok) {
+                if (data) {
                     setDisabled(true);
                     console.log("successful signup");
                     toast.success("Signup successful");
