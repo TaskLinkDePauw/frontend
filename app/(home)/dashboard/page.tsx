@@ -41,6 +41,7 @@ const inquiryBreakdownData = {
 
 const inquiryBreakdownOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: { position: "bottom" as const },
     title: { display: false },
@@ -67,6 +68,7 @@ const barChartOptions = {
   },
 };
 
+// Example data for "Projects per Month" bar chart
 const inquirySourceData = {
   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
   datasets: [
@@ -144,7 +146,7 @@ export default function DashboardPage() {
       */}
       <div className="w-screen h-screen overflow-hidden flex items-center justify-center bg-[#F9FAFB]">
         {/* 
-          Fixed-size "frame" at 1400×900 (for example). 
+          Fixed-size "frame" or full size "frame" 
           Then scale it so it fits on typical laptops. 
           Tweak 'scale-90' or 'scale-75' if it doesn't fit.
         */}
@@ -152,8 +154,6 @@ export default function DashboardPage() {
           {/* Header Row */}
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-4">
-              {/* Avatar or Logo */}
-              <div className="w-10 h-10 rounded-full bg-gray-200" />
               <div>
                 <h1 className="text-xl font-bold">Hello Olivia</h1>
                 <p className="text-sm text-gray-600">
@@ -196,22 +196,24 @@ export default function DashboardPage() {
 
           {/* Row 1: 3 Charts */}
           <div className="grid grid-cols-3 gap-4 mb-4">
+            {/* Inquiry Breakdown (Doughnut) */}
             <div className="bg-[#FAFAFE] rounded-md p-4 flex flex-col">
               <p className="text-sm font-semibold text-gray-700 mb-2">Inquiry Breakdown</p>
-              {/* 
-                Chart container sized to fit the space 
-                so that everything is smaller. 
-              */}
-              <div className="relative w-full h-[220px]">
+              {/* Center the Doughnut chart */}
+              <div className="relative w-full h-[220px] flex items-center justify-center">
                 <Doughnut data={inquiryBreakdownData} options={inquiryBreakdownOptions} />
               </div>
             </div>
+
+            {/* Inquiries per Month (Bar) */}
             <div className="bg-[#FAFAFE] rounded-md p-4 flex flex-col">
               <p className="text-sm font-semibold text-gray-700 mb-2">Inquiries per Month</p>
               <div className="relative w-full h-[220px]">
                 <Bar data={inquiriesPerMonthData} options={barChartOptions} />
               </div>
             </div>
+
+            {/* Projects per Month (Bar) */}
             <div className="bg-[#FAFAFE] rounded-md p-4 flex flex-col">
               <p className="text-sm font-semibold text-gray-700 mb-2">Projects per Month</p>
               <div className="relative w-full h-[220px]">
@@ -222,18 +224,24 @@ export default function DashboardPage() {
 
           {/* Row 2: 3 Charts */}
           <div className="grid grid-cols-3 gap-4">
+            {/* Income per Quarter (Doughnut) */}
             <div className="bg-[#FAFAFE] rounded-md p-4 flex flex-col">
               <p className="text-sm font-semibold text-gray-700 mb-2">Income per Quarter</p>
-              <div className="relative w-full h-[220px]">
-                <Doughnut data={incomePerQuarterData} />
+              {/* Center the Doughnut chart */}
+              <div className="relative w-full h-[220px] flex items-center justify-center">
+                <Doughnut data={incomePerQuarterData} options={{ ...inquiryBreakdownOptions, maintainAspectRatio: false }} />
               </div>
             </div>
+
+            {/* Income per Month (Bar) */}
             <div className="bg-[#FAFAFE] rounded-md p-4 flex flex-col">
               <p className="text-sm font-semibold text-gray-700 mb-2">Income per Month</p>
               <div className="relative w-full h-[220px]">
                 <Bar data={incomePerMonthData} options={barChartOptions} />
               </div>
             </div>
+
+            {/* Income Source per Month (Stacked Bar) */}
             <div className="bg-[#FAFAFE] rounded-md p-4 flex flex-col">
               <p className="text-sm font-semibold text-gray-700 mb-2">Income Source per Month</p>
               <div className="relative w-full h-[220px]">
