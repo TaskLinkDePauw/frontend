@@ -26,7 +26,8 @@ export default function LoginPage() {
             const result = await loginUser({ username, password });
             if (result) {
                 const { data }: { data: any } = result;
-                if (data) {
+                if (data.detail !== "Not Found") {
+                    console.log(data)
                     console.log("successful signup");
                     toast.success("Login successful");
                     setTimeout(() => {
@@ -34,6 +35,7 @@ export default function LoginPage() {
                         setIsLoading(false);
                     }, 2000);
                 } else {
+                    console.log(data)
                     setInvalidCredentials(true);
                     toast.error("Invalid Credential");
                 }

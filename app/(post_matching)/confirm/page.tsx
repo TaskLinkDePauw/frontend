@@ -6,12 +6,20 @@ import { useState, useCallback } from "react";
 import { useRouter } from 'next/navigation';
 import { CalendarIcon } from "@/components/icons/calendar-icon";
 import { LocationIcon } from "@/components/icons/location-icon";
+import { usePostMatchingContext } from "../layout";
+
 
 export default function ConfirmPage() {
     const router = useRouter();
     const [selectedFrequency, setSelectedFrequency] = useState<string>("Just Once");
     const [isProcessing, setIsProcessing] = useState(false);
+    const postMatchingContext = usePostMatchingContext();
 
+    if (!postMatchingContext) {
+        return <div>Error: PostMatchingContext is null</div>;
+    }
+
+    const { content } = postMatchingContext;
 
     interface FrequencyKey {
         key: string;
@@ -135,16 +143,16 @@ export default function ConfirmPage() {
                         <Avatar
                             radius="full"
                             size="lg"
-                            src="https://heroui.com/avatars/avatar-1.png"
+                            src="https://i.pravatar.cc/150?u=f0d115b0b717adbf2c4c"
                         />
-                        <div className="text-lg font-semibold leading-none text-default-600">Zoey Lang</div>
+                        <div className="text-lg font-semibold leading-none text-default-600">Mike Johnson</div>
                     </CardHeader>
                     <Divider />
                     <CardBody className="p-4 h-auto w-full flex">
                         <div className="py-4 flex flex-col gap-4 justify-center items-start">
                             <div className="flex flex-row gap-2 justify-center items-center">
                                 <CalendarIcon width={20} height={20} />
-                                <div className="text-sm font-semibold leading-none text-default-600">Thu, Feb 27 at 02:30</div>
+                                <div className="text-sm font-semibold leading-none text-default-600">Wed, Mar 05 at 02:30 PM</div>
                             </div>
                             <div className="flex flex-row gap-2 justify-center items-center">
                                 <LocationIcon width={20} height={20} />
@@ -161,7 +169,7 @@ export default function ConfirmPage() {
                                 isReadOnly
                                 fullWidth
                                 placeholder="Enter your description"
-                                value="I need to find a cleaner to help me clean my apartment. I have a small dog, so I need someone who is comfortable with pets."
+                                value={content}
                                 variant="bordered"
                             />
                         </div>
@@ -185,16 +193,16 @@ export default function ConfirmPage() {
                     <CardFooter className="flex flex-row gap-4 p-4">
 
                         <Button
-                            onPress={() => router.replace('/post_matching/recommendation')}
+                            onPress={() => router.replace('/recommendation')}
                             fullWidth
                         >
                             Cancel
                         </Button>
                         <Button
-                            onPress={() => router.replace('/post_matching/success')}
+                            onPress={() => router.replace('/success')}
                             fullWidth
                             isLoading={isProcessing}
-                            color="primary"
+                            className="plain-green-color text-white"
                         >
                             Confirm & Pay
                         </Button>

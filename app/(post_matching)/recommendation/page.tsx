@@ -6,7 +6,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { RecommendedSupplier } from "@/components/recommended_supplier";
 import { usePostMatchingContext } from "../layout";
-import { matchPost } from "@/services/post";
+import { getUserByID, matchPost } from "@/services/home";
 
 export default function RecommendPage() {
     const postMatchingContext = usePostMatchingContext();
@@ -19,6 +19,16 @@ export default function RecommendPage() {
     const [selectedDateKey, setSelectedDateKey] = useState<string>("Today");
     const [selectedTimeKeys, setSelectedTimeKeys] = useState<Set<string>>(new Set());
 
+    interface Tasker {
+        id: string;
+        name: string;
+        avatarUrl: string;
+        rating: number;
+        description: string;
+        reasoning: string;
+    }
+
+    const [taskers, setTaskers] = useState<Tasker[]>([]);
     interface FilterDateKey {
         key: string;
         title: string;
@@ -61,27 +71,30 @@ export default function RecommendPage() {
         },
     ]
 
-    const tasker = {
-        id: "1",
-        name: "Stephanie K.",
-        avatarUrl: "https://i.pravatar.cc/150?u=stephaniek", // or any image URL
-        rate: 60.91,
-        minHours: 2,
-        rating: 4.9,
-        reviewCount: 63,
-        tasksCount: 82,
-        overallTasksCount: 80,
-        description:
-            "Experienced airbnb cleaner. I can bring all supplies or use yours prefer. Fast and efficient. Feel free to ask questions!",
-        reviewAuthor: "Natalie O.",
-        reviewDate: "Sat, Feb 8",
-        reviewText:
-            "Stephanie was available much sooner than other Taskers. Very punctual and brought her own supplies. Worked quickly and communicated when she was almost finished so I could review the work. Details like fridge/microwave, baseboards, and vents were careful...",
-    };
+
 
     const queryMatchingSupplier = async () => {
         const data = await matchPost(content);
-        console.log(data);
+        const results = data.data.results;
+        console.log(results);
+
+        if (results.length > 0) {
+            console.log(results);
+            const updatedTaskers = results.map((result: any) => {
+                if (result.detail === undefined) {
+                    return {
+                        id: result.id,
+                        name: result.name,
+                        avatarUrl: result.avatar_url,
+                        rating: result.review_rating,
+                        description: result.experience_description,
+                        reasoning: result.structured_summary.reasoning,
+                    };
+                }
+            });
+            console.log(updatedTaskers);
+            setTaskers(updatedTaskers);
+        }
         // Query the matching supplier based on the selectedDateKey and selectedTimeKeys
     };
 
@@ -165,8 +178,11 @@ export default function RecommendPage() {
             </div>
             {/* Middle side - Supplier Content */}
             <div className="w-1/2 flex flex-col gap-4">
-                <RecommendedSupplier supplier={tasker} />
-                <RecommendedSupplier supplier={tasker} />
+                {
+                    taskers.map((tasker) => (
+                        <RecommendedSupplier supplier={tasker} />
+                    ))
+                }
             </div>
         </div >
     );

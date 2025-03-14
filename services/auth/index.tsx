@@ -9,7 +9,7 @@ const MAX_NUMBER_OF_TRIES = 3
 
 export const loginUser = async (loginUserInput: LoginUserInput) => {
     try {
-        const response = await fetch(`${API_URL}/login_user`, {
+        const response = await fetch(`${API_URL}/login`, {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -42,7 +42,7 @@ export const logoutUser = async () => {
 
 export const createUser = async (createUserInput: CreateUserInput) => {
     try {
-        const response = await fetch(`${API_URL}/create_user`, {
+        const response = await fetch(`${API_URL}/users`, {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -51,7 +51,7 @@ export const createUser = async (createUserInput: CreateUserInput) => {
         });
         const data = await response.json();
 
-        return { data, ok: response.ok };
+        return { data };
     } catch (error) {
         console.error('Error creating user:', error);
         throw error;

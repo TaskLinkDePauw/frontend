@@ -6,7 +6,7 @@ export type LoginUserInput = {
 export type CreateUserInput = {
     email: string;
     password: string;
-    fullName: string;
+    full_name: string;
     username: string;
 }
 
@@ -46,4 +46,8 @@ export type UpdateEmailInput = {
     title?: string;
     subject?: string;
     content?: string;
+}
+
+export type CreatePostInput = {
+    content: string;
 }

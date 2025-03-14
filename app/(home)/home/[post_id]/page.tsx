@@ -38,24 +38,17 @@ export default function PostDetailsPage({ params }: { params: Params }) {
     const suppliers = [
         {
             id: 1,
-            name: "Elite Affordable Movers & Cleaning",
-            avatarUrl: "https://i.pravatar.cc/150?u=supplier1",
-            biddingPrice: "$199",
-            serviceRequest: "Includes carpet and kitchen cleaning.",
+            name: "Tommy Shelby",
+            avatarUrl: "https://i.pravatar.cc/150?u=supplier2",
+            biddingPrice: "$17",
+            serviceRequest: "Two-way ride to Walmart in my Toyota-Camry.",
         },
         {
             id: 2,
-            name: "Sparkle Clean Services",
-            avatarUrl: "https://i.pravatar.cc/150?u=supplier2",
-            biddingPrice: "$180",
-            serviceRequest: "Eco-friendly products, one-day service.",
-        },
-        {
-            id: 3,
-            name: "Pro Clean Experts",
+            name: "Andy Dufresne",
             avatarUrl: "https://i.pravatar.cc/150?u=supplier3",
-            biddingPrice: "$220",
-            serviceRequest: "Deep cleaning plus balcony and window washing.",
+            biddingPrice: "$20",
+            serviceRequest: "I can offer you two-way ride to Walmart in my Honda-CRV.",
         },
     ];
 
@@ -84,7 +77,7 @@ export default function PostDetailsPage({ params }: { params: Params }) {
     };
 
     const handleContinue = useCallback(() => {
-        router.replace("/post_matching/confirm");
+        router.replace("/confirm");
         onClose();
     }, []);
 
@@ -102,23 +95,23 @@ export default function PostDetailsPage({ params }: { params: Params }) {
                             <Avatar
                                 radius="full"
                                 size="md"
-                                src="https://heroui.com/avatars/avatar-1.png"
+                                src="http://www.gravatar.com/avatar/?d=mp"
                             />
                             <div className="flex flex-col items-start gap-1">
-                                <div className="text-small font-semibold leading-none text-default-600">Zoey Lang</div>
+                                <div className="text-small font-semibold leading-none text-default-600">Dat Vuong</div>
                                 <div className="text-small tracking-tight text-default-400">Feb 28 at 8:54 AM</div>
                             </div>
                         </ModalHeader>
-                        <ModalBody className="px-4 text-small text-default-400">
-                            <p>Finding a reliable and efficient cleaning service can be a daunting task, especially with the plethora of options available in the market. Whether you are looking for a one-time deep clean or a regular maintenance service, it is crucial to find a service provider that meets your specific needs and standards. A good cleaning service should offer a range of services, including dusting, vacuuming, mopping, and sanitizing various areas of your home or office. Additionally, they should use eco-friendly cleaning products and have a team of trained and trustworthy professionals. When searching for a cleaning service, it is advisable to read reviews, ask for recommendations, and check their credentials and insurance. A reputable cleaning service will also provide a detailed quote and be transparent about their pricing and policies. By taking the time to research and choose the right cleaning service, you can ensure a clean and healthy environment for yourself and your loved ones, giving you peace of mind and more time to focus on other important tasks.</p>
+                        <ModalBody className="px-4 text-small text-default-600">
+                            <p>Finding a reliable local driver to Walmart</p>
                             <Divider />
                             <div className="flex flex-row gap-3">
                                 <div className="flex gap-1">
-                                    <p className="font-semibold text-default-400 text-small">3</p>
+                                    <p className="font-semibold text-default-400 text-small">2</p>
                                     <p className=" text-default-400 text-small">Offers</p>
                                 </div>
                                 <div className="flex gap-1">
-                                    <p className="font-semibold text-default-400 text-small">100</p>
+                                    <p className="font-semibold text-default-400 text-small">12</p>
                                     <p className="text-default-400 text-small">Views</p>
                                 </div>
                             </div>
@@ -129,7 +122,6 @@ export default function PostDetailsPage({ params }: { params: Params }) {
                                 {suppliers.map((supplier) => (
                                     <div className="flex flex-row gap-4 items-start">
                                         <Avatar src={supplier.avatarUrl} size="md" />
-
                                         <Card key={supplier.id} className="flex-1">
                                             <CardHeader className="flex flex-row items-start gap-4 p-2">
                                                 <div className="flex flex-col flex-1">

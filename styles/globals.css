@@ -4,12 +4,12 @@
 
 .gradient-button {
     background: linear-gradient(to right, #B98AE8, #733ff9);
-    color: #373737;
+    color: #ffffff;
     border: none;
 }
 
 .gradient-text {
-    background: linear-gradient(to right, #30c2b7, #70e1a6, #96efc1);
+    background: linear-gradient(to right, #B98AE8, #733ff9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
