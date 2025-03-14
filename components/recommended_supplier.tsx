@@ -72,7 +72,7 @@ export const RecommendedSupplier = ({ supplier }: { supplier: Supplier }) => {
                                 key={idx}
                                 height={18}
                                 width={18}
-                                color={idx < Math.round(supplier.rating) ? "#733ff9" : "#E5E7EB"}
+                                color={idx < Math.round(supplier.rating) ? "#2a88a3" : "#E5E7EB"}
                             />
                         ))}
                         <span className="text-sm text-default-400">
@@ -94,7 +94,7 @@ export const RecommendedSupplier = ({ supplier }: { supplier: Supplier }) => {
                 {/* Reasoning for recommendation */}
                 <div>
                     <div className="flex flex-row items-center gap-1">
-                        <AIIdeaIcon height={18} width={18} color="#733ff9" />
+                        <AIIdeaIcon height={18} width={18} color="#2a88a3" />
                         <p className="text-sm text-default-600 font-bold mb-1">
                             Why this supplier is recommended:
                         </p>

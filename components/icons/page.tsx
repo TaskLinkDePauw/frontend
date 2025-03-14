@@ -27,5 +27,6 @@ import { WarningIcon } from "./warning-icon";
 import { MessageIcon } from "./message-icon";
 import { CalendarIcon } from "./calendar-icon";
 import { LocationIcon } from "./location-icon";
+import { VerifyIcon } from "./verify-icon";
 
-export { HomeIcon, AddIcon, ProfileIcon, DatabaseIcon, NotificationIcon, LinkedInIcon, LinkIcon, NameIcon, EmailIcon, PhoneIcon, EditIcon, FileIcon, EyeIcon, TrashIcon, LockIcon, GlobeIcon, StarIcon, WrenchIcon, PaintIcon, ThreeDotVerticleIcon, ClockIcon, StickIcon, ImageIcon, VideoIcon, AIIdeaIcon, WarningIcon, MessageIcon, CalendarIcon, LocationIcon };
+export { VerifyIcon, HomeIcon, AddIcon, ProfileIcon, DatabaseIcon, NotificationIcon, LinkedInIcon, LinkIcon, NameIcon, EmailIcon, PhoneIcon, EditIcon, FileIcon, EyeIcon, TrashIcon, LockIcon, GlobeIcon, StarIcon, WrenchIcon, PaintIcon, ThreeDotVerticleIcon, ClockIcon, StickIcon, ImageIcon, VideoIcon, AIIdeaIcon, WarningIcon, MessageIcon, CalendarIcon, LocationIcon };

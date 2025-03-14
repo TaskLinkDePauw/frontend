@@ -66,7 +66,7 @@ export default function ConfirmPage() {
                         {/* Frequency */}
                         <div className="flex flex-col gap-2">
                             <p className="font-bold text-lg text-default-600">Select your frequency</p>
-                            <RadioGroup color="secondary" defaultValue={selectedFrequency} onValueChange={setSelectedFrequency} >
+                            <RadioGroup color="default" defaultValue={selectedFrequency} onValueChange={setSelectedFrequency} >
                                 {frequencyKeys.map((frequency) => (
                                     <Radio key={frequency.key} value={frequency.key} description={frequency.description}>{frequency.title}
                                         {/* <div className="flex flex-col gap-1">
