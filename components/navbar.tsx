@@ -46,7 +46,7 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                     "data-[active=true]:after:right-0",
                     "data-[active=true]:after:h-[2px]",
                     "data-[active=true]:after:rounded-[2px]",
-                    "data-[active=true]:after:bg-[#733ff9]",
+                    "data-[active=true]:after:bg-[#2a88a3]",
                     "navbar-size",
                 ],
             }}
@@ -69,7 +69,7 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                         offset={25}
                     >
                         <Link href="profile">
-                            <ProfileIcon color='#733ff9' />
+                            <ProfileIcon color='#2a88a3' />
                         </Link>
                     </Tooltip>
                 </NavbarItem>
@@ -85,7 +85,7 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                         offset={25}
                     >
                         <Link href="home">
-                            <HomeIcon color='#733ff9' />
+                            <HomeIcon color='#2a88a3' />
                         </Link>
                     </Tooltip>
                 </NavbarItem>
@@ -101,7 +101,7 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                         offset={25}
                     >
                         <Link href="database">
-                            <DatabaseIcon color='#733ff9' />
+                            <DatabaseIcon color='#2a88a3' />
                         </Link>
                     </Tooltip>
                 </NavbarItem>
@@ -135,7 +135,7 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                         offset={25}
                     >
                         <Link href="#">
-                            <MessageIcon color="#733ff9" />
+                            <MessageIcon color="#2a88a3" />
                         </Link>
                     </Tooltip>
                 </NavbarItem>
@@ -151,7 +151,7 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                         offset={25}
                     >
                         <Link href="#">
-                            <NotificationIcon color="#733ff9" />
+                            <NotificationIcon color="#2a88a3" />
                         </Link>
                     </Tooltip>
                 </NavbarItem>
@@ -160,7 +160,7 @@ export const NavigationBar = ({ isAuthPage = true }) => {
                         <DropdownTrigger>
                             <Avatar
                                 className="transition-transform"
-                                style={{ boxShadow: '0 0 0 2px #733ff9' }}
+                                style={{ boxShadow: '0 0 0 2px #2a88a3' }}
                                 name="Jason Hughes"
                                 size="md"
                                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"

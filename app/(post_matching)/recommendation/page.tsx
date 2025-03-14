@@ -1,7 +1,7 @@
 'use client';
 
 import { StarIcon } from "@/components/icons/star-icon";
-import { Listbox, ListboxItem, Card, CardHeader, CardBody, Avatar, Divider, Button, CardFooter, Slider } from "@heroui/react";
+import { Listbox, ListboxItem, Card, CardHeader, CardBody, Divider, Button, CardFooter, Slider } from "@heroui/react";
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { RecommendedSupplier } from "@/components/recommended_supplier";

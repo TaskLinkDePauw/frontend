@@ -1,6 +1,6 @@
 'use client';
 
-import { Listbox, ListboxItem, Input, Card, CardHeader, CardBody, Avatar, Divider, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Accordion, AccordionItem, Button, useDisclosure, Chip, CardFooter, User } from "@heroui/react";
+import { Link, Listbox, ListboxItem, Input, Card, CardHeader, CardBody, Avatar, Divider, Accordion, AccordionItem, Button, useDisclosure, Chip, CardFooter, User } from "@heroui/react";
 import { EditIcon, WrenchIcon, PaintIcon, ThreeDotVerticleIcon, ClockIcon, StickIcon, ImageIcon, VideoIcon, AIIdeaIcon, WarningIcon } from "@/components/icons/page";
 import { useState, useCallback, useEffect } from "react";
 
@@ -75,26 +75,34 @@ export default function HomePage() {
     interface Service {
         id: number;
         name: string;
-        items: string[];
+        items: { title: string; href: string }[];
         icon: JSX.Element;
     }
     const recommendedServices: Service[] = [
         {
             id: 1,
             name: "Assembly",
-            items: ["IKEA Assembly", "Pax Assembly"],
+            items: [{ title: "IKEA Assembly", href: "#" }, { title: "Pax Assembly", href: "#" }],
             icon: <WrenchIcon height={24} width={24} />,
         },
         {
             id: 2,
             name: "Paint",
-            items: ["Interior Painting", "Exterior Painting", "Wall Painting"],
+            items: [
+                { title: "Interior Painting", href: "#" },
+                { title: "Exterior Painting", href: "#" },
+                { title: "Wall Painting", href: "#" }
+            ],
             icon: <PaintIcon height={24} width={24} />,
         },
         {
             id: 3,
             name: "Ride",
-            items: ["Airport", "Walmart", "Kroger"],
+            items: [
+                { title: "Airport", href: "#" },
+                { title: "Walmart", href: "walmart_create_post" },
+                { title: "Kroger", href: "#" }
+            ],
             icon: <CarIcon height={24} width={24} />,
         },
     ];
@@ -151,7 +159,7 @@ export default function HomePage() {
                             {recommendedServices.map((service) => (
                                 <AccordionItem className="pl-4 pr-5 py-0 m-0 text-md" key={service.id} startContent={service.icon} title={<span className="p-0 m-0 text-sm text-default-600">{service.name}</span>}>
                                     {service.items.map((item) => (
-                                        <Button key={item} variant="bordered" radius="full" className="text-sm m-1">{item}</Button>
+                                        <Button as={Link} href={item.href} key={item.title} variant="bordered" radius="full" className="text-sm m-1">{item.title}</Button>
                                     ))}
                                 </AccordionItem>
                             ))}
