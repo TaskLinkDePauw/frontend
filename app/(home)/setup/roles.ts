@@ -661,7 +661,19 @@ const RAW_ROLES: string[] = [
     "Yoga Teacher - Sport and Fitness",
     "Youth Worker - Community Work",
     "Zookeeper - Work with Animals",
-    "Zoologist - Biology - Work with Animals"
+    "Zoologist - Biology - Work with Animals",
+    "Goft Trainer",
+    "Goft Professional",
+    "Goft Teacher",
+    "Goft Analyst",
+    "Goft Coach",
+    "Goft Instructor",
+    "Goft Manager",
+    "Goft Player",
+    "Goft Referee",
+    "Goft Scout",
+    "Goft Writer",
+    "Goft Agent",
 ];
 
   
